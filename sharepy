@@ -1,0 +1,59 @@
+#!/bin/bash
+
+    #####################################
+    # Copyright (C) 2020 Sumeed Manzoor #
+    #####################################
+
+    # This program is free software: you can redistribute it and/or modify
+    # it under the terms of the GNU General Public License as published by
+    # the Free Software Foundation, either version 3 of the License, or
+    # (at your option) any later version.
+
+    # This program is distributed in the hope that it will be useful,
+    # but WITHOUT ANY WARRANTY; without even the implied warranty of
+    # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    # GNU General Public License for more details.
+
+    # You should have received a copy of the GNU General Public License
+    # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Help()
+{
+   # Display Help
+   echo "Syntax: sharepy -e envname -o output -h"
+   echo "options:"
+   echo "e     Environment name."
+   echo "o     Output folder."
+   echo "h     Print this Help."
+   echo
+}
+
+
+yell() { echo "$0: $*" >&2; }
+die() { yell "$*"; exit 111; }
+try() { "$@" || die "cannot $*"; }
+
+if [ -z "$*" ]; then echo "No arguments provided. View help with '-h' flag." && exit 0; fi
+
+OUT="."
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -e|--environment) ENV="$2"; shift ;;
+        -o|--output) OUT=$2 ; shift ;;
+        -h|--help) Help ; exit;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+eval "$(conda shell.bash hook)"
+conda activate $ENV
+
+mkdir -p $OUT/$ENV
+cd $OUT/$ENV
+conda list > ${ENV}.txt
+conda list --explicit > ${ENV}_explicit.txt 
+conda env export > ${ENV}.yml
+conda env export --from-history > ${ENV}_cp.yml
+cd -
