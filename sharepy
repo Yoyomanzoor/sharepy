@@ -55,5 +55,5 @@ cd $OUT/$ENV
 conda list > ${ENV}.txt
 conda list --explicit > ${ENV}_explicit.txt 
 conda env export > ${ENV}.yml
-conda env export --from-history > ${ENV}_cp.yml
+conda env export --from-history > ${ENV}_crossplatform.yml
 cd -
