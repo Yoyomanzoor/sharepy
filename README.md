@@ -11,7 +11,7 @@ Tested in `x86_64-pc-linux-gnu (64-bit)` and `x86_64-w64-mingw32/x64 (64-bit)` d
 1. Download the `sharepy` bash script.
 
 ```
-sudo wget https://gist.githubusercontent.com/Yoyomanzoor/0ae9008abd4e72384e21098580a9d75b/raw/c156ace6a85421c87bf5a16d1e528a71417bee77/sharepy.sh -O /usr/local/bin/sharepy
+sudo wget https://gist.githubusercontent.com/Yoyomanzoor/0ae9008abd4e72384e21098580a9d75b/raw/7d9f9129398bf2f7e8f6a1aabde3177177049316/sharepy.sh -O /usr/local/bin/sharepy
 sudo chmod +x /usr/local/bin/sharepy
 ```
 
